@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NLayerNetCoreProject.Core\NLayerNetCoreProject.Core.csproj" />
+    <ProjectReference Include="..\NLayerNetCoreProject.Data\NLayerNetCoreProject.Data.csproj" />
+  </ItemGroup>
+
 </Project>
