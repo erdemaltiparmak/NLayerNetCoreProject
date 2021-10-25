@@ -11,10 +11,10 @@ namespace NLayerNetCoreProject.Data.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity:class
     {
-        private readonly DbContext _dbContext;
+        protected readonly DbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(DbContext dbContext)
+        public Repository(NLayerDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<TEntity>();
@@ -31,9 +31,9 @@ namespace NLayerNetCoreProject.Data.Repository
 
         }
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)
         {
-           return  _dbSet.Where(predicate);
+            return await _dbSet.Where(predicate).ToListAsync();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

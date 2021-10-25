@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NLayerNetCoreProject.Core\NLayerNetCoreProject.Core.csproj" />
     <ProjectReference Include="..\NLayerNetCoreProject.Data\NLayerNetCoreProject.Data.csproj" />
     <ProjectReference Include="..\NLayerNetCoreProject.Service\NLayerNetCoreProject.Service.csproj" />
