@@ -18,6 +18,9 @@ namespace NLayerNetCoreProject.API.Mapping
             CreateMap<CategoryDto, Category>();
             CreateMap<ProductDto, Product>();
             CreateMap<Product, ProductDto>();
+            CreateMap<CustomerDto, Customer>();
+            CreateMap<Customer, CustomerDto>();
+
         }
     }
 

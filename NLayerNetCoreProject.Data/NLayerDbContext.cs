@@ -14,14 +14,19 @@ namespace NLayerNetCoreProject.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories{ get; set; }
+        public DbSet<Category> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductSeed(new[] {1,2} ));
-            modelBuilder.ApplyConfiguration(new CategorySeed(new[] {1,2} ));
+            modelBuilder.ApplyConfiguration(new ProductSeed(new[] { 1, 2 }));
+            modelBuilder.ApplyConfiguration(new CategorySeed(new[] { 1, 2 }));
 
+
+            var builder = modelBuilder.Entity<Customer>();
+            builder.HasKey(x => x.CustomerId);
+            builder.Property(x => x.CustomerId).UseIdentityColumn();
         }
     }
 }
