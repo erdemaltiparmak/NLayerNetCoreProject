@@ -1,10 +1,11 @@
-﻿using System;
+﻿using NLayerNetCoreProject.Core.Interface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NLayerNetCoreProject.Core.Entity
 {
-    public class Product
+    public class Product:IEntity
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }

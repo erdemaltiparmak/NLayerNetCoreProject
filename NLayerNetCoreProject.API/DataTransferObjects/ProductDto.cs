@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,10 +8,15 @@ namespace NLayerNetCoreProject.API.DataTransferObjects
 {
     public class ProductDto
     {
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public int Stock { get; set; }
-        public decimal ProductPrice { get; set; }
+        [Required(ErrorMessage = "Kategori Gerekli")]
         public int CategoryId { get; set; }
+        public int ProductId { get; set; }
+        [Required(ErrorMessage ="Ad gerekli")]
+        public string ProductName { get; set; }
+        [Required(ErrorMessage = "Ad gerekli")]
+        public int Stock { get; set; }
+        [Required(ErrorMessage = "Ad gerekli")]//Range kullanmalıyım sayısal verilerin defaultları var
+        public decimal ProductPrice { get; set; }
+      
     }
 }

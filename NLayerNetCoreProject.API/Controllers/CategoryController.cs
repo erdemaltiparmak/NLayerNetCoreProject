@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLayerNetCoreProject.API.DataTransferObjects;
+using NLayerNetCoreProject.API.Filters;
 using NLayerNetCoreProject.Core.Entity;
 using NLayerNetCoreProject.Core.Interface.Service;
 using System;
@@ -30,7 +31,7 @@ namespace NLayerNetCoreProject.API.Controllers
             var dto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
             return Ok(dto);
         }
-        
+        [ServiceFilter(typeof(NotFoundFilter<Category>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -61,7 +62,7 @@ namespace NLayerNetCoreProject.API.Controllers
             var entity = _categoryService.Update(_mapper.Map<Category>(categoryDto));
             return NoContent();
         }
-
+        [ServiceFilter(typeof(NotFoundFilter<Category>))]
         [HttpDelete("{id}")]
         public IActionResult Remove(int id)
         {

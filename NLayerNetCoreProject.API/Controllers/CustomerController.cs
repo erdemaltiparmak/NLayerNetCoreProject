@@ -29,5 +29,13 @@ namespace NLayerNetCoreProject.API.Controllers
             var customers = await _customerService.GetAllAsync();
             return Ok(_mapper.Map<IEnumerable<CustomerDto>>(customers));
         }
+        [HttpPost]
+        public async Task<IActionResult> Add(Customer customer)
+        {
+            var c =await _customerService.AddAsync(customer);
+
+            return Ok(_mapper.Map<CustomerDto>(customer));
+
+        }
     }
 }

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using NLayerNetCoreProject.Core.Interface;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
 namespace NLayerNetCoreProject.Core.Entity
 {
-    public class Category
+    public class Category:IEntity
     {
         public Category()
         {

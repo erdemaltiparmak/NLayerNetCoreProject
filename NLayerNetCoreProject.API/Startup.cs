@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using NLayerNetCoreProject.API.DataTransferObjects;
+using NLayerNetCoreProject.API.Filters;
+using NLayerNetCoreProject.API.Extensions;
+
 using NLayerNetCoreProject.Core.Interface;
 using NLayerNetCoreProject.Core.Interface.Service;
 using NLayerNetCoreProject.Core.Repository;
@@ -38,6 +45,7 @@ namespace NLayerNetCoreProject.API
             services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped(typeof(NotFoundFilter<>));
 
             services.AddDbContext<NLayerDbContext>(op =>
             {
@@ -50,6 +58,7 @@ namespace NLayerNetCoreProject.API
             });
 
             services.AddControllers();
+            services.Configure<ApiBehaviorOptions>(o =>  o.SuppressModelStateInvalidFilter = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +68,7 @@ namespace NLayerNetCoreProject.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCustomExceptionHandler();
 
             app.UseHttpsRedirection();
 

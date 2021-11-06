@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLayerNetCoreProject.API.DataTransferObjects;
+using NLayerNetCoreProject.API.Filters;
 using NLayerNetCoreProject.Core.Entity;
 using NLayerNetCoreProject.Core.Interface.Service;
 using System;
@@ -32,6 +33,7 @@ namespace NLayerNetCoreProject.API.Controllers
             return Ok(dto);
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -40,6 +42,7 @@ namespace NLayerNetCoreProject.API.Controllers
             return Ok(dto);
         }
 
+        [ValidationFilter]
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
@@ -55,6 +58,7 @@ namespace NLayerNetCoreProject.API.Controllers
             return NoContent();
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpDelete("{id}")]
         public IActionResult Remove(int id)
         {
