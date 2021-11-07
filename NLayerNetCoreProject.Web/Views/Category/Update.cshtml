@@ -1,0 +1,27 @@
+﻿@model CategoryDto
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Kategori Update</h1>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="Update" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="bg-danger text-white"></div>
+            <div class="form-group">
+                <label asp-for="CategoryName" class="">Kategori Adı</label>
+                <input asp-for="CategoryName" class="form-control" />
+                <input type="hidden" asp-for="CategoryId" />
+                <span asp-validation-for="CategoryName" class="bg-danger text-white"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Güncelle" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+
+</div>
