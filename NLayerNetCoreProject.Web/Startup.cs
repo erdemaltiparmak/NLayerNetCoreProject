@@ -1,16 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLayerNetCoreProject.Core.Interface;
 using NLayerNetCoreProject.Core.Interface.Service;
 using NLayerNetCoreProject.Core.Repository;
-using NLayerNetCoreProject.Data;
-using NLayerNetCoreProject.Data.Repository;
-using NLayerNetCoreProject.Service.Service;
+using NLayerNetCoreProject.Web.APIService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,23 +28,11 @@ namespace NLayerNetCoreProject.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-
-            services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IService<>), typeof(Service<>));
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IProductService, ProductService>();
-
-            services.AddDbContext<NLayerDbContext>(op =>
+            services.AddHttpClient<CategoryAPIService>(options =>
             {
-                op.UseSqlServer(
-
-                    Configuration.GetConnectionString("SqlConnectionString"),
-                    o => {
-                        o.MigrationsAssembly("NLayerNetCoreProject.Data");
-                    });
+                options.BaseAddress = new Uri(Configuration["baseUrl"]);
             });
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NLayerNetCoreProject.Service\NLayerNetCoreProject.Service.csproj" />
+    <ProjectReference Include="..\NLayerNetCoreProject.Core\NLayerNetCoreProject.Core.csproj" />
   </ItemGroup>
 
 </Project>
